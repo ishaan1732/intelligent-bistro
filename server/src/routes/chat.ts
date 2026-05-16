@@ -1,0 +1,62 @@
+import { Router, Request, Response } from "express";
+import { z } from "zod";
+import { GoogleGenerativeAI } from "@google/generative-ai";
+import menu from "../data/menu.json";
+
+const router = Router();
+
+const ChatRequestSchema = z.object({
+  message: z.string(),
+  cart: z.array(z.unknown()),
+});
+
+router.post("/", async (req: Request, res: Response) => {
+  const result = ChatRequestSchema.safeParse(req.body);
+  if (!result.success) {
+    res.status(400).json({ error: result.error.flatten() });
+    return;
+  }
+
+  const { message, cart } = result.data;
+
+  try {
+    const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY!);
+    console.log("KEY LOADED:", process.env.GEMINI_API_KEY?.slice(0, 8))
+    const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
+
+    const systemPrompt = `You are an AI ordering assistant for a restaurant called Intelligent Bistro.
+
+Your job is to interpret the user's message and ALWAYS return a JSON object with exactly two fields:
+- reply: a short friendly message to the user
+- actions: an array of cart actions
+
+RULES:
+1. Always add items you CAN find on the menu immediately — do not ask for confirmation.
+2. If an exact item isn't found, add the closest match from the menu.
+3. Never return an empty actions array if any part of the request can be fulfilled.
+4. For items you truly cannot match, mention it briefly in reply but still action everything else.
+5. Always use the exact itemId, name, and price from the menu JSON below.
+
+Action types allowed:
+{ "type": "add", "itemId": "string", "name": "string", "price": number, "qty": number }
+{ "type": "remove", "itemId": "string" }
+{ "type": "update", "itemId": "string", "qty": number }
+{ "type": "clear" }
+
+Current menu: ${JSON.stringify(menu)}
+Current cart: ${JSON.stringify(cart)}
+
+CRITICAL: Return ONLY a raw JSON object. No markdown, no backticks, no explanation text. Just the JSON.`;
+
+    const response = await model.generateContent(`${systemPrompt}\n\nUser message: ${message}`);
+    const text = response.response.text();
+
+    const parsed = JSON.parse(text);
+    res.json({ reply: parsed.reply, actions: parsed.actions });
+  } catch (error){
+    console.error("CHAT ERROR:", error)
+    res.json({ reply: "Sorry, I didn't understand that. Try again.", actions: [] });
+  }
+});
+
+export default router;
