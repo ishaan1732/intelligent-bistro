@@ -15,7 +15,8 @@ import { useFocusEffect } from 'expo-router';
 import axios from 'axios';
 import type { MenuItem } from '@/types';
 import MenuItemCard from '@/components/MenuItem';
-import { API_BASE_URL } from '@/app/config';
+import useCartStore from '@/store/cartStore';
+import { API_BASE_URL } from '@/constants/config';
 
 const C = {
   bg: '#0A0A0A',
@@ -26,10 +27,18 @@ const C = {
   pill: '#1A1A1A',
 };
 
-const CATEGORIES = ['All', 'Burgers', 'Drinks', 'Sides', 'Desserts'];
+const CUISINES = ['All', 'American', 'Japanese', 'Greek', 'French', 'Mexican', 'Indian'];
 
 // Each card manages its own staggered entrance animation on mount
-function AnimatedMenuCard({ item, index }: { item: MenuItem; index: number }) {
+function AnimatedMenuCard({
+  item,
+  index,
+  isRecommended,
+}: {
+  item: MenuItem;
+  index: number;
+  isRecommended: boolean;
+}) {
   const opacity = useRef(new Animated.Value(0)).current;
   const translateY = useRef(new Animated.Value(24)).current;
 
@@ -52,24 +61,30 @@ function AnimatedMenuCard({ item, index }: { item: MenuItem; index: number }) {
 
   return (
     <Animated.View style={{ opacity, transform: [{ translateY }] }}>
-      <MenuItemCard item={item} />
+      <View style={isRecommended ? styles.recommendedWrapper : undefined}>
+        <MenuItemCard item={item} />
+        {isRecommended && (
+          <View style={styles.recommendedBadge}>
+            <Text style={styles.recommendedBadgeText}>✨ Recommended</Text>
+          </View>
+        )}
+      </View>
     </Animated.View>
   );
 }
 
 export default function MenuScreen() {
+  const recommendedItemIds = useCartStore((state) => state.recommendedItemIds);
   const [items, setItems] = useState<MenuItem[]>([]);
   const [loading, setLoading] = useState(true);
   const [refreshing, setRefreshing] = useState(false);
   const [error, setError] = useState(false);
-  const [selectedCategory, setSelectedCategory] = useState('All');
+  const [selectedCuisine, setSelectedCuisine] = useState('All');
 
   const filteredItems =
-    selectedCategory === 'All'
+    selectedCuisine === 'All'
       ? items
-      : items.filter(
-          (i) => i.category.toLowerCase() === selectedCategory.toLowerCase()
-        );
+      : items.filter((i) => i.cuisine === selectedCuisine.toLowerCase());
 
   async function fetchMenu(isRefresh = false) {
     if (isRefresh) setRefreshing(true);
@@ -109,20 +124,20 @@ export default function MenuScreen() {
         style={styles.categoryBar}
         contentContainerStyle={styles.categoryBarContent}
       >
-        {CATEGORIES.map((cat) => (
+        {CUISINES.map((cuisine) => (
           <TouchableOpacity
-            key={cat}
-            style={[styles.pill, selectedCategory === cat && styles.pillActive]}
-            onPress={() => setSelectedCategory(cat)}
+            key={cuisine}
+            style={[styles.pill, selectedCuisine === cuisine && styles.pillActive]}
+            onPress={() => setSelectedCuisine(cuisine)}
             activeOpacity={0.75}
           >
             <Text
               style={[
                 styles.pillText,
-                selectedCategory === cat && styles.pillTextActive,
+                selectedCuisine === cuisine && styles.pillTextActive,
               ]}
             >
-              {cat}
+              {cuisine}
             </Text>
           </TouchableOpacity>
         ))}
@@ -145,7 +160,7 @@ export default function MenuScreen() {
       {!loading && !error && (
         // key prop forces full remount on category change so animations restart
         <FlatList
-          key={selectedCategory}
+          key={selectedCuisine}
           data={filteredItems}
           keyExtractor={(item) => item.id}
           contentContainerStyle={styles.listContent}
@@ -159,7 +174,11 @@ export default function MenuScreen() {
             />
           }
           renderItem={({ item, index }) => (
-            <AnimatedMenuCard item={item} index={index} />
+            <AnimatedMenuCard
+              item={item}
+              index={index}
+              isRecommended={recommendedItemIds.includes(item.id)}
+            />
           )}
         />
       )}
@@ -229,5 +248,24 @@ const styles = StyleSheet.create({
     fontSize: 15,
     textAlign: 'center',
     lineHeight: 22,
+  },
+  recommendedWrapper: {
+    borderWidth: 1.5,
+    borderColor: C.accent,
+    borderRadius: 16,
+  },
+  recommendedBadge: {
+    position: 'absolute',
+    top: 8,
+    right: 8,
+    backgroundColor: C.accent,
+    borderRadius: 8,
+    paddingHorizontal: 8,
+    paddingVertical: 4,
+  },
+  recommendedBadgeText: {
+    color: '#000000',
+    fontSize: 10,
+    fontWeight: 'bold',
   },
 });

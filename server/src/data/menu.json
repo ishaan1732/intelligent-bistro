@@ -68,5 +68,275 @@
     "description": "Fresh banana, three scoops of ice cream, hot fudge, caramel, whipped cream, and a cherry on top.",
     "price": 8.49,
     "category": "desserts"
+  },
+  {
+    "id": "jp1",
+    "name": "Tonkotsu Ramen",
+    "description": "Rich, creamy pork bone broth with hand-pulled noodles, chashu pork, soft-boiled egg, nori, and green onions.",
+    "price": 14.99,
+    "category": "mains",
+    "cuisine": "japanese",
+    "moods": ["comfort", "tired"]
+  },
+  {
+    "id": "jp2",
+    "name": "Chicken Katsu",
+    "description": "Crispy panko-breaded chicken cutlet drizzled with tangy tonkatsu sauce and served over steamed white rice.",
+    "price": 15.99,
+    "category": "mains",
+    "cuisine": "japanese",
+    "moods": ["tired", "adventurous"]
+  },
+  {
+    "id": "jp3",
+    "name": "Gyoza",
+    "description": "Pan-fried pork and cabbage dumplings with a golden crust, served with a savory soy-ginger dipping sauce.",
+    "price": 8.99,
+    "category": "sides",
+    "cuisine": "japanese",
+    "moods": ["adventurous", "neutral"]
+  },
+  {
+    "id": "jp4",
+    "name": "Dragon Roll",
+    "description": "Crispy shrimp tempura and cucumber roll topped with fresh avocado slices and a drizzle of spicy mayo.",
+    "price": 16.99,
+    "category": "mains",
+    "cuisine": "japanese",
+    "moods": ["adventurous", "stressed"]
+  },
+  {
+    "id": "jp5",
+    "name": "Matcha Ice Cream",
+    "description": "Velvety ceremonial-grade matcha ice cream with a subtle earthy sweetness, served with a dusting of green tea powder.",
+    "price": 6.99,
+    "category": "desserts",
+    "cuisine": "japanese",
+    "moods": ["stressed", "heartbroken"]
+  },
+  {
+    "id": "jp6",
+    "name": "Miso Soup",
+    "description": "Silky white miso broth with soft tofu, wakame seaweed, and a sprinkle of fresh scallions.",
+    "price": 4.99,
+    "category": "sides",
+    "cuisine": "japanese",
+    "moods": ["stressed", "comfort"]
+  },
+  {
+    "id": "gr1",
+    "name": "Chicken Souvlaki",
+    "description": "Grilled marinated chicken skewers seasoned with lemon, garlic, and oregano, served with warm pita and tzatziki.",
+    "price": 15.99,
+    "category": "mains",
+    "cuisine": "greek",
+    "moods": ["tired", "adventurous"]
+  },
+  {
+    "id": "gr2",
+    "name": "Spanakopita",
+    "description": "Flaky phyllo pastry filled with a savory blend of spinach, feta, and fresh herbs, baked to golden perfection.",
+    "price": 9.99,
+    "category": "sides",
+    "cuisine": "greek",
+    "moods": ["adventurous", "stressed"]
+  },
+  {
+    "id": "gr3",
+    "name": "Greek Salad",
+    "description": "Crisp romaine, ripe tomatoes, Kalamata olives, cucumber, and creamy feta tossed in a bright lemon-herb vinaigrette.",
+    "price": 10.99,
+    "category": "sides",
+    "cuisine": "greek",
+    "moods": ["stressed", "neutral"]
+  },
+  {
+    "id": "gr4",
+    "name": "Baklava",
+    "description": "Layers of buttery phyllo filled with spiced walnuts and pistachios, soaked in fragrant honey and rose water syrup.",
+    "price": 6.99,
+    "category": "desserts",
+    "cuisine": "greek",
+    "moods": ["joyful", "heartbroken"]
+  },
+  {
+    "id": "gr5",
+    "name": "Tzatziki Bowl",
+    "description": "Thick Greek yogurt whipped with cucumber, fresh dill, and garlic, served with warm toasted pita wedges.",
+    "price": 8.99,
+    "category": "sides",
+    "cuisine": "greek",
+    "moods": ["stressed", "neutral"]
+  },
+  {
+    "id": "gr6",
+    "name": "Lamb Gyros",
+    "description": "Slow-roasted seasoned lamb shaved thin and wrapped in warm pita with tomato, onion, and creamy tzatziki.",
+    "price": 16.99,
+    "category": "mains",
+    "cuisine": "greek",
+    "moods": ["tired", "adventurous", "comfort"]
+  },
+  {
+    "id": "fr1",
+    "name": "Croque Monsieur",
+    "description": "A classic French pressed sandwich of smoky ham and Gruyère layered between buttery bread, topped with golden béchamel.",
+    "price": 12.99,
+    "category": "mains",
+    "cuisine": "french",
+    "moods": ["comfort", "tired"]
+  },
+  {
+    "id": "fr2",
+    "name": "Beef Bourguignon",
+    "description": "Tender braised beef slow-cooked in Burgundy wine with pearl onions, mushrooms, and fresh thyme.",
+    "price": 22.99,
+    "category": "mains",
+    "cuisine": "french",
+    "moods": ["romantic", "tired"]
+  },
+  {
+    "id": "fr3",
+    "name": "Crème Brûlée",
+    "description": "Silky vanilla custard baked to perfection and finished with a paper-thin caramelized sugar crust torched tableside.",
+    "price": 8.99,
+    "category": "desserts",
+    "cuisine": "french",
+    "moods": ["romantic", "joyful"]
+  },
+  {
+    "id": "fr4",
+    "name": "Croissant",
+    "description": "Buttery, cloud-light layers of hand-laminated dough baked until shatteringly crisp outside and pillowy soft within.",
+    "price": 4.99,
+    "category": "sides",
+    "cuisine": "french",
+    "moods": ["comfort", "neutral"]
+  },
+  {
+    "id": "fr5",
+    "name": "French Onion Soup",
+    "description": "Deeply caramelized onions in a rich beef broth, blanketed with a toasted baguette crouton and bubbling Gruyère.",
+    "price": 9.99,
+    "category": "mains",
+    "cuisine": "french",
+    "moods": ["comfort", "heartbroken"]
+  },
+  {
+    "id": "fr6",
+    "name": "Crêpes Suzette",
+    "description": "Delicate crêpes folded in a warm Grand Marnier and orange butter sauce, finished with a dramatic tableside flambé.",
+    "price": 10.99,
+    "category": "desserts",
+    "cuisine": "french",
+    "moods": ["romantic", "joyful"]
+  },
+  {
+    "id": "mx1",
+    "name": "Street Tacos",
+    "description": "Three soft corn tortillas filled with seasoned carne asada, white onion, cilantro, and a squeeze of fresh lime.",
+    "price": 11.99,
+    "category": "mains",
+    "cuisine": "mexican",
+    "moods": ["adventurous", "joyful"]
+  },
+  {
+    "id": "mx2",
+    "name": "Guacamole and Chips",
+    "description": "Hand-mashed avocado with lime, jalapeño, cilantro, and red onion, served with a basket of warm house-made tortilla chips.",
+    "price": 8.99,
+    "category": "sides",
+    "cuisine": "mexican",
+    "moods": ["neutral", "joyful"]
+  },
+  {
+    "id": "mx3",
+    "name": "Churros",
+    "description": "Crispy cinnamon-sugar fried dough sticks served piping hot alongside a rich dark chocolate dipping sauce.",
+    "price": 6.99,
+    "category": "desserts",
+    "cuisine": "mexican",
+    "moods": ["heartbroken", "joyful"]
+  },
+  {
+    "id": "mx4",
+    "name": "Horchata",
+    "description": "Chilled creamy rice milk sweetened with cinnamon and vanilla, a soothing and refreshing traditional Mexican staple.",
+    "price": 3.99,
+    "category": "drinks",
+    "cuisine": "mexican",
+    "moods": ["neutral", "stressed"]
+  },
+  {
+    "id": "mx5",
+    "name": "Enchiladas",
+    "description": "Corn tortillas stuffed with tender pulled chicken and smothered in smoky red chile sauce, topped with melted cotija and crema.",
+    "price": 13.99,
+    "category": "mains",
+    "cuisine": "mexican",
+    "moods": ["comfort", "adventurous"]
+  },
+  {
+    "id": "mx6",
+    "name": "Elote",
+    "description": "Grilled corn on the cob slathered in mayo, rolled in cotija cheese, dusted with chili powder, and finished with fresh lime.",
+    "price": 5.99,
+    "category": "sides",
+    "cuisine": "mexican",
+    "moods": ["adventurous", "joyful"]
+  },
+  {
+    "id": "in1",
+    "name": "Butter Chicken",
+    "description": "Tender chicken tikka simmered in a velvety tomato-cream sauce infused with aromatic spices, served with basmati rice.",
+    "price": 15.99,
+    "category": "mains",
+    "cuisine": "indian",
+    "moods": ["comfort", "tired"]
+  },
+  {
+    "id": "in2",
+    "name": "Garlic Naan",
+    "description": "Pillowy leavened flatbread baked in a tandoor oven, brushed generously with garlic butter and fresh cilantro.",
+    "price": 3.99,
+    "category": "sides",
+    "cuisine": "indian",
+    "moods": ["comfort", "neutral"]
+  },
+  {
+    "id": "in3",
+    "name": "Mango Lassi",
+    "description": "A thick, refreshing blend of ripe Alphonso mango, chilled yogurt, and a pinch of cardamom — sweet and utterly calming.",
+    "price": 4.99,
+    "category": "drinks",
+    "cuisine": "indian",
+    "moods": ["stressed", "joyful"]
+  },
+  {
+    "id": "in4",
+    "name": "Gulab Jamun",
+    "description": "Melt-in-your-mouth milk solid dumplings soaked in warm rose and cardamom syrup, served with a scoop of kulfi.",
+    "price": 6.99,
+    "category": "desserts",
+    "cuisine": "indian",
+    "moods": ["heartbroken", "joyful"]
+  },
+  {
+    "id": "in5",
+    "name": "Palak Paneer",
+    "description": "Cubes of fresh paneer nestled in a velvety spiced spinach sauce, brightened with ginger, garlic, and a touch of cream.",
+    "price": 14.99,
+    "category": "mains",
+    "cuisine": "indian",
+    "moods": ["stressed", "adventurous"]
+  },
+  {
+    "id": "in6",
+    "name": "Biryani",
+    "description": "Fragrant long-grain basmati rice layered with slow-cooked spiced lamb, caramelized onions, saffron, and fresh mint.",
+    "price": 16.99,
+    "category": "mains",
+    "cuisine": "indian",
+    "moods": ["adventurous", "tired"]
   }
 ]

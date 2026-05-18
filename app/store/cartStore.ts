@@ -4,17 +4,26 @@ import type { CartItem, CartAction, ChatMessage } from '@/types';
 interface CartStore {
   cart: CartItem[];
   messages: ChatMessage[];
+  moodSet: boolean;
+  mood: string | null;
+  moodLabel: string | null;
+  recommendedItemIds: string[];
   addItem: (item: Omit<CartItem, 'qty'>) => void;
   removeItem: (itemId: string) => void;
   updateQty: (itemId: string, qty: number) => void;
   clearCart: () => void;
   applyActions: (actions: CartAction[]) => void;
   addMessage: (message: ChatMessage) => void;
+  setMoodData: (data: { mood: string; moodLabel: string; recommendedItemIds: string[] }) => void;
 }
 
 const useCartStore = create<CartStore>()((set, get) => ({
   cart: [],
   messages: [],
+  moodSet: false,
+  mood: null,
+  moodLabel: null,
+  recommendedItemIds: [],
 
   addItem: ({ itemId, name, price }) =>
     set((state) => {
@@ -87,6 +96,9 @@ const useCartStore = create<CartStore>()((set, get) => ({
 
   addMessage: (message) =>
     set((state) => ({ messages: [...state.messages, message] })),
+
+  setMoodData: ({ mood, moodLabel, recommendedItemIds }) =>
+    set({ moodSet: true, mood, moodLabel, recommendedItemIds }),
 }));
 
 export default useCartStore;

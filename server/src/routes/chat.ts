@@ -8,6 +8,12 @@ const router = Router();
 const ChatRequestSchema = z.object({
   message: z.string(),
   cart: z.array(z.unknown()),
+  mood: z.string().optional(),
+  recommendedItemIds: z.array(z.string()).optional(),
+  history: z.array(z.object({
+    role: z.enum(['user', 'assistant']),
+    content: z.string()
+  })).optional(),
 });
 
 router.post("/", async (req: Request, res: Response) => {
@@ -17,7 +23,12 @@ router.post("/", async (req: Request, res: Response) => {
     return;
   }
 
-  const { message, cart } = result.data;
+  const { message, cart, mood, recommendedItemIds, history } = result.data;
+
+  const historyText = history && history.length > 0
+    ? 'Recent conversation:\n' +
+      history.slice(-6).map(m => `${m.role}: ${m.content}`).join('\n')
+    : '';
 
   try {
     const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY!);
@@ -52,12 +63,22 @@ Action types allowed:
 { "type": "update", "itemId": "string", "qty": number }
 { "type": "clear" }
 
+MOOD CONTEXT (if provided):
+User's current mood: ${mood || 'not specified'}
+
+If mood is provided:
+- Keep your tone consistent with the mood throughout
+- If user asks for recommendations, prioritize items that match their mood
+- Be empathetic and warm in your responses
+
+Do not change anything else about how you process orders or return actions.
+
 Current menu: ${JSON.stringify(menu)}
 Current cart: ${JSON.stringify(cart)}
 
 CRITICAL: Return ONLY a raw JSON object. No markdown, no backticks, no explanation text. Just the JSON.`;
 
-    const response = await model.generateContent(`${systemPrompt}\n\nUser message: ${message}`);
+    const response = await model.generateContent(`${systemPrompt}\n\n${historyText}\n\nUser message: ${message}`);
     const text = response.response.text();
 
     const parsed = JSON.parse(text);
