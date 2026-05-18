@@ -15,24 +15,16 @@ interface Props {
 }
 
 export default function MenuItemCard({ item }: Props) {
-  const addItem = useCartStore((state) => state.addItem);
+  const { addItem, updateQty, removeItem, cart } = useCartStore();
+  const cartItem = cart.find((c) => c.itemId === item.id);
+  const qty = cartItem?.qty || 0;
   const scale = useRef(new Animated.Value(1)).current;
 
-  function handlePress() {
-    addItem({ itemId: item.id, name: item.name, price: item.price });
+  function handleAdd() {
+    addItem({ itemId: item.id, name: item.name, price: item.price, qty: 1 });
     Animated.sequence([
-      Animated.spring(scale, {
-        toValue: 0.88,
-        useNativeDriver: true,
-        tension: 300,
-        friction: 7,
-      }),
-      Animated.spring(scale, {
-        toValue: 1,
-        useNativeDriver: true,
-        tension: 300,
-        friction: 7,
-      }),
+      Animated.spring(scale, { toValue: 0.88, useNativeDriver: true, tension: 300, friction: 7 }),
+      Animated.spring(scale, { toValue: 1, useNativeDriver: true, tension: 300, friction: 7 }),
     ]).start();
   }
 
@@ -46,15 +38,32 @@ export default function MenuItemCard({ item }: Props) {
       </Text>
       <View style={styles.footer}>
         <Text style={styles.price}>${item.price.toFixed(2)}</Text>
-        <Animated.View style={{ transform: [{ scale }] }}>
-          <TouchableOpacity
-            style={styles.addButton}
-            onPress={handlePress}
-            activeOpacity={0.8}
-          >
-            <Text style={styles.addButtonText}>Add to Cart</Text>
-          </TouchableOpacity>
-        </Animated.View>
+        {qty === 0 ? (
+          <Animated.View style={{ transform: [{ scale }] }}>
+            <TouchableOpacity style={styles.addBtn} onPress={handleAdd} activeOpacity={0.8}>
+              <Text style={styles.addBtnText}>+ Add to Cart</Text>
+            </TouchableOpacity>
+          </Animated.View>
+        ) : (
+          <View style={styles.qtyRow}>
+            <TouchableOpacity
+              style={styles.qtyBtn}
+              onPress={() => {
+                if (qty === 1) removeItem(item.id);
+                else updateQty(item.id, qty - 1);
+              }}
+            >
+              <Text style={styles.qtyBtnText}>−</Text>
+            </TouchableOpacity>
+            <Text style={styles.qtyNum}>{qty}</Text>
+            <TouchableOpacity
+              style={styles.qtyBtn}
+              onPress={() => addItem({ itemId: item.id, name: item.name, price: item.price, qty: 1 })}
+            >
+              <Text style={styles.qtyBtnText}>+</Text>
+            </TouchableOpacity>
+          </View>
+        )}
       </View>
     </View>
   );
@@ -89,15 +98,45 @@ const styles = StyleSheet.create({
     fontSize: 17,
     fontWeight: 'bold',
   },
-  addButton: {
+  addBtn: {
     backgroundColor: C.accent,
     paddingHorizontal: 18,
     paddingVertical: 9,
     borderRadius: 20,
   },
-  addButtonText: {
+  addBtnText: {
     color: '#000000',
     fontSize: 13,
     fontWeight: '700',
+  },
+  qtyRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    backgroundColor: '#F4A825',
+    borderRadius: 10,
+    paddingHorizontal: 6,
+    paddingVertical: 6,
+  },
+  qtyBtn: {
+    width: 36,
+    height: 36,
+    backgroundColor: '#000000',
+    borderRadius: 8,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  qtyBtnText: {
+    color: '#F4A825',
+    fontSize: 20,
+    fontWeight: 'bold',
+    lineHeight: 24,
+  },
+  qtyNum: {
+    color: '#000000',
+    fontSize: 16,
+    fontWeight: 'bold',
+    minWidth: 28,
+    textAlign: 'center',
   },
 });

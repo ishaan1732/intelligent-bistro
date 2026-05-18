@@ -56,10 +56,10 @@ type LocalMessage = TextMessage | RecommendationMessage;
 
 // Single recommendation card
 function RecommendationCard({ item }: { item: MenuItem }) {
-  const addItem = useCartStore((state) => state.addItem);
-  const cart = useCartStore((state) => state.cart);
+  const { addItem, updateQty, removeItem, cart } = useCartStore();
+  const cartItem = cart.find((c) => c.itemId === item.id);
+  const qty = cartItem?.qty || 0;
   const opacity = useRef(new Animated.Value(0)).current;
-  const inCart = cart.some((i) => i.itemId === item.id);
 
   useEffect(() => {
     Animated.timing(opacity, { toValue: 1, duration: 350, useNativeDriver: true }).start();
@@ -67,15 +67,42 @@ function RecommendationCard({ item }: { item: MenuItem }) {
 
   return (
     <Animated.View style={[styles.recCard, { opacity }]}>
-      <Text style={styles.recName} numberOfLines={2}>{item.name}</Text>
-      <Text style={styles.recPrice}>${item.price.toFixed(2)}</Text>
-      <TouchableOpacity
-        style={styles.recAddBtn}
-        onPress={() => addItem({ itemId: item.id, name: item.name, price: item.price })}
-        activeOpacity={0.8}
-      >
-        <Text style={styles.recAddBtnText}>{inCart ? '✓' : '+ Add'}</Text>
-      </TouchableOpacity>
+
+      {/* Top section — always takes available space pushing button down */}
+      <View style={{ flex: 1 }}>
+        <Text style={styles.recName} numberOfLines={2}>{item.name}</Text>
+        <Text style={styles.recPrice}>${item.price.toFixed(2)}</Text>
+      </View>
+
+      {/* Bottom section — quantity controls or add button */}
+      {qty === 0 ? (
+        <TouchableOpacity
+          style={styles.recAddBtn}
+          onPress={() => addItem({ itemId: item.id, name: item.name, price: item.price, qty: 1 })}
+          activeOpacity={0.8}
+        >
+          <Text style={styles.recAddBtnText}>+ Add</Text>
+        </TouchableOpacity>
+      ) : (
+        <View style={styles.qtyRow}>
+          <TouchableOpacity
+            style={styles.qtyBtn}
+            onPress={() => {
+              if (qty === 1) removeItem(item.id);
+              else updateQty(item.id, qty - 1);
+            }}
+          >
+            <Text style={styles.qtyBtnText}>−</Text>
+          </TouchableOpacity>
+          <Text style={styles.qtyNum}>{qty}</Text>
+          <TouchableOpacity
+            style={styles.qtyBtn}
+            onPress={() => addItem({ itemId: item.id, name: item.name, price: item.price, qty: 1 })}
+          >
+            <Text style={styles.qtyBtnText}>+</Text>
+          </TouchableOpacity>
+        </View>
+      )}
     </Animated.View>
   );
 }
@@ -193,7 +220,7 @@ export default function ChatScreen() {
   const [menuItems, setMenuItems] = useState<MenuItem[]>([]);
   const [input, setInput] = useState('');
   const [sending, setSending] = useState(false);
-  const listRef = useRef<FlatList>(null);
+  const flatListRef = useRef<FlatList>(null);
   const pulseAnim = useRef(new Animated.Value(0.5)).current;
   const moodCardsOpacity = useRef(new Animated.Value(1)).current;
 
@@ -350,69 +377,69 @@ export default function ChatScreen() {
       <KeyboardAvoidingView
         style={styles.flex}
         behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-        keyboardVerticalOffset={Platform.OS === 'ios' ? 0 : 0}
       >
-        {/* Tappable area for keyboard dismiss — wraps only header + list + mood cards */}
+
+        {/* Header only — tapping header dismisses keyboard */}
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-          <View style={styles.flex}>
-            {/* Header */}
-            <View style={styles.header}>
-              <Text style={styles.headerTitle}>AI Assistant</Text>
-              <View style={styles.onlineRow}>
-                <Animated.View style={[styles.onlineDot, { opacity: pulseAnim }]} />
-                <Text style={styles.onlineLabel}>Online</Text>
-              </View>
+          <View style={styles.header}>
+            <Text style={styles.headerTitle}>AI Assistant</Text>
+            <View style={styles.onlineRow}>
+              <Animated.View style={[styles.onlineDot, { opacity: pulseAnim }]} />
+              <Text style={styles.onlineLabel}>Online</Text>
             </View>
-
-            {/* Messages */}
-            <FlatList
-              ref={listRef}
-              data={localMessages}
-              keyExtractor={(_, i) => i.toString()}
-              contentContainerStyle={styles.listContent}
-              showsVerticalScrollIndicator={false}
-              onContentSizeChange={() =>
-                listRef.current?.scrollToEnd({ animated: true })
-              }
-              onLayout={() =>
-                listRef.current?.scrollToEnd({ animated: false })
-              }
-              renderItem={({ item }) => {
-                if (item.type === 'recommendations') {
-                  return <RecommendationRow items={item.items} />;
-                }
-                return <MessageBubble item={item} />;
-              }}
-              ListFooterComponent={sending ? <TypingIndicator /> : null}
-            />
-
-            {/* Mood cards — only rendered when moodSet is false */}
-            {!moodSet && (
-              <Animated.View style={[styles.moodCardsContainer, { opacity: moodCardsOpacity }]}>
-                <ScrollView
-                  horizontal
-                  showsHorizontalScrollIndicator={false}
-                  contentContainerStyle={styles.moodCardsScroll}
-                >
-                  {MOODS.map((m) => (
-                    <TouchableOpacity
-                      key={m.mood}
-                      style={styles.moodCard}
-                      onPress={() => handleMoodSelect(m.mood, m.label, m.emoji)}
-                      activeOpacity={0.75}
-                      disabled={sending}
-                    >
-                      <Text style={styles.moodEmoji}>{m.emoji}</Text>
-                      <Text style={styles.moodLabel}>{m.label}</Text>
-                    </TouchableOpacity>
-                  ))}
-                </ScrollView>
-              </Animated.View>
-            )}
           </View>
         </TouchableWithoutFeedback>
 
-        {/* Input bar — outside TouchableWithoutFeedback so touches reach the TextInput */}
+        {/* FlatList — NOT inside TouchableWithoutFeedback */}
+        <FlatList
+          ref={flatListRef}
+          style={styles.flex}
+          data={localMessages}
+          keyExtractor={(_, i) => i.toString()}
+          contentContainerStyle={styles.listContent}
+          showsVerticalScrollIndicator={false}
+          keyboardShouldPersistTaps="handled"
+          keyboardDismissMode="interactive"
+          onContentSizeChange={() =>
+            flatListRef.current?.scrollToEnd({ animated: true })
+          }
+          onLayout={() =>
+            flatListRef.current?.scrollToEnd({ animated: false })
+          }
+          renderItem={({ item }) => {
+            if (item.type === 'recommendations') {
+              return <RecommendationRow items={item.items} />;
+            }
+            return <MessageBubble item={item} />;
+          }}
+          ListFooterComponent={sending ? <TypingIndicator /> : null}
+        />
+
+        {/* Mood cards — NOT inside TouchableWithoutFeedback */}
+        {!moodSet && (
+          <Animated.View style={[styles.moodCardsContainer, { opacity: moodCardsOpacity }]}>
+            <ScrollView
+              horizontal
+              showsHorizontalScrollIndicator={false}
+              contentContainerStyle={styles.moodCardsScroll}
+            >
+              {MOODS.map((m) => (
+                <TouchableOpacity
+                  key={m.mood}
+                  style={styles.moodCard}
+                  onPress={() => handleMoodSelect(m.mood, m.label, m.emoji)}
+                  activeOpacity={0.75}
+                  disabled={sending}
+                >
+                  <Text style={styles.moodEmoji}>{m.emoji}</Text>
+                  <Text style={styles.moodLabel}>{m.label}</Text>
+                </TouchableOpacity>
+              ))}
+            </ScrollView>
+          </Animated.View>
+        )}
+
+        {/* Input bar */}
         <View style={styles.inputBar}>
           <TextInput
             style={styles.input}
@@ -440,6 +467,7 @@ export default function ChatScreen() {
             />
           </TouchableOpacity>
         </View>
+
       </KeyboardAvoidingView>
     </SafeAreaView>
   );
@@ -576,6 +604,8 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     padding: 12,
     width: 160,
+    height: 140,
+    justifyContent: 'space-between',
   },
   recName: {
     color: C.textPrimary,
@@ -598,6 +628,36 @@ const styles = StyleSheet.create({
     color: '#000000',
     fontSize: 13,
     fontWeight: '700',
+  },
+  qtyRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    backgroundColor: C.accent,
+    borderRadius: 8,
+    paddingHorizontal: 4,
+    paddingVertical: 4,
+  },
+  qtyBtn: {
+    width: 30,
+    height: 30,
+    backgroundColor: '#000000',
+    borderRadius: 6,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  qtyBtnText: {
+    color: C.accent,
+    fontSize: 18,
+    fontWeight: 'bold',
+    lineHeight: 22,
+  },
+  qtyNum: {
+    color: '#000000',
+    fontSize: 15,
+    fontWeight: 'bold',
+    minWidth: 24,
+    textAlign: 'center',
   },
 
   inputBar: {
