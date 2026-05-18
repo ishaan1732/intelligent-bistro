@@ -4,70 +4,90 @@
     "name": "Classic Smash Burger",
     "description": "Double smashed beef patty, American cheese, pickles, shredded lettuce, and bistro sauce on a brioche bun.",
     "price": 13.99,
-    "category": "burgers"
+    "category": "burgers",
+    "cuisine": "american",
+    "moods": ["comfort", "tired", "neutral"]
   },
   {
     "id": "b2",
     "name": "Mushroom Swiss Burger",
     "description": "Beef patty topped with sautéed cremini mushrooms, melted Swiss, and garlic aioli on a toasted sesame bun.",
     "price": 14.99,
-    "category": "burgers"
+    "category": "burgers",
+    "cuisine": "american",
+    "moods": ["comfort", "tired", "neutral"]
   },
   {
     "id": "b3",
     "name": "Spicy Crispy Chicken Burger",
     "description": "Buttermilk fried chicken breast, jalapeño slaw, pepper jack cheese, and chipotle mayo on a brioche bun.",
     "price": 14.49,
-    "category": "burgers"
+    "category": "burgers",
+    "cuisine": "american",
+    "moods": ["comfort", "tired", "neutral"]
   },
   {
     "id": "s1",
     "name": "Truffle Parmesan Fries",
     "description": "Hand-cut fries tossed in truffle oil and finished with shaved Parmesan and fresh parsley.",
     "price": 5.99,
-    "category": "sides"
+    "category": "sides",
+    "cuisine": "american",
+    "moods": ["comfort", "heartbroken", "neutral"]
   },
   {
     "id": "s2",
     "name": "Onion Rings",
     "description": "Beer-battered thick-cut onion rings served with smoky ranch dipping sauce.",
     "price": 5.49,
-    "category": "sides"
+    "category": "sides",
+    "cuisine": "american",
+    "moods": ["comfort", "heartbroken", "neutral"]
   },
   {
     "id": "s3",
     "name": "Side Salad",
     "description": "Mixed greens, cherry tomatoes, cucumber, red onion, and choice of house or Caesar dressing.",
     "price": 4.99,
-    "category": "sides"
+    "category": "sides",
+    "cuisine": "american",
+    "moods": ["comfort", "heartbroken", "neutral"]
   },
   {
     "id": "d1",
     "name": "Classic Lemonade",
     "description": "Fresh-squeezed lemonade with a hint of mint. Sweetened or unsweetened.",
     "price": 3.49,
-    "category": "drinks"
+    "category": "drinks",
+    "cuisine": "american",
+    "moods": ["stressed", "joyful", "neutral"]
   },
   {
     "id": "d2",
     "name": "Craft Root Beer Float",
     "description": "House-made craft root beer topped with two scoops of vanilla bean ice cream.",
     "price": 5.99,
-    "category": "drinks"
+    "category": "drinks",
+    "cuisine": "american",
+    "moods": ["stressed", "joyful", "neutral"]
   },
   {
     "id": "de1",
     "name": "Warm Chocolate Lava Cake",
     "description": "Molten dark chocolate cake served with a scoop of vanilla ice cream and raspberry coulis.",
     "price": 7.99,
-    "category": "desserts"
+    "category": "desserts",
+    "cuisine": "american",
+    "moods": ["heartbroken", "joyful", "romantic"]
   },
   {
     "id": "de2",
     "name": "Bistro Banana Split",
     "description": "Fresh banana, three scoops of ice cream, hot fudge, caramel, whipped cream, and a cherry on top.",
     "price": 8.49,
-    "category": "desserts"
+    "category": "desserts",
+    "cuisine": "american",
+    "moods": ["heartbroken", "joyful", "romantic"]
   },
   {
     "id": "jp1",

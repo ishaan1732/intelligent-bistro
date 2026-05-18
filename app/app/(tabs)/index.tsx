@@ -110,38 +110,42 @@ export default function MenuScreen() {
   );
 
   return (
-    <SafeAreaView style={styles.container} edges={['top']}>
+    <SafeAreaView style={{ flex: 1, backgroundColor: '#0A0A0A' }} edges={['top']}>
       {/* Header */}
-      <View style={styles.header}>
+      <View style={{ backgroundColor: '#0A0A0A', paddingHorizontal: 20, paddingVertical: 16 }}>
         <Text style={styles.headerTitle}>Intelligent Bistro</Text>
         <Text style={styles.headerSubtitle}>Premium Dining Experience</Text>
       </View>
 
-      {/* Category filter */}
-      <ScrollView
-        horizontal
-        showsHorizontalScrollIndicator={false}
-        style={styles.categoryBar}
-        contentContainerStyle={styles.categoryBarContent}
-      >
-        {CUISINES.map((cuisine) => (
-          <TouchableOpacity
-            key={cuisine}
-            style={[styles.pill, selectedCuisine === cuisine && styles.pillActive]}
-            onPress={() => setSelectedCuisine(cuisine)}
-            activeOpacity={0.75}
-          >
-            <Text
-              style={[
-                styles.pillText,
-                selectedCuisine === cuisine && styles.pillTextActive,
-              ]}
+      {/* Cuisine filter pills */}
+      <View style={{ backgroundColor: '#0A0A0A', paddingVertical: 12 }}>
+        <ScrollView
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          contentContainerStyle={{ paddingHorizontal: 16 }}
+        >
+          {CUISINES.map((cuisine) => (
+            <TouchableOpacity
+              key={cuisine}
+              style={[styles.pill, selectedCuisine === cuisine && styles.pillActive]}
+              onPress={() => setSelectedCuisine(cuisine)}
+              activeOpacity={0.75}
             >
-              {cuisine}
-            </Text>
-          </TouchableOpacity>
-        ))}
-      </ScrollView>
+              <Text
+                style={[
+                  styles.pillText,
+                  selectedCuisine === cuisine && styles.pillTextActive,
+                ]}
+              >
+                {cuisine}
+              </Text>
+            </TouchableOpacity>
+          ))}
+        </ScrollView>
+      </View>
+
+      {/* Divider */}
+      <View style={{ height: 1, backgroundColor: '#2A2A2A' }} />
 
       {loading && !refreshing && (
         <View style={styles.centered}>
@@ -158,12 +162,13 @@ export default function MenuScreen() {
       )}
 
       {!loading && !error && (
-        // key prop forces full remount on category change so animations restart
+        // key prop forces full remount on cuisine change so animations restart
         <FlatList
           key={selectedCuisine}
+          style={{ flex: 1 }}
           data={filteredItems}
           keyExtractor={(item) => item.id}
-          contentContainerStyle={styles.listContent}
+          contentContainerStyle={{ padding: 16, paddingBottom: 32 }}
           showsVerticalScrollIndicator={false}
           refreshControl={
             <RefreshControl
@@ -187,13 +192,6 @@ export default function MenuScreen() {
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: C.bg },
-  header: {
-    paddingHorizontal: 20,
-    paddingVertical: 16,
-    borderBottomWidth: 1,
-    borderBottomColor: C.border,
-  },
   headerTitle: {
     color: C.accent,
     fontSize: 26,
@@ -205,37 +203,27 @@ const styles = StyleSheet.create({
     fontSize: 13,
     marginTop: 3,
   },
-  categoryBar: { flexGrow: 0 },
-  categoryBarContent: {
-    paddingHorizontal: 16,
-    paddingVertical: 12,
-    gap: 8,
-  },
   pill: {
-    paddingHorizontal: 18,
-    paddingVertical: 8,
-    borderRadius: 20,
-    backgroundColor: C.pill,
+    paddingHorizontal: 20,
+    paddingVertical: 10,
+    borderRadius: 24,
+    marginRight: 8,
+    backgroundColor: '#2A2A2A',
     borderWidth: 1,
-    borderColor: C.border,
+    borderColor: '#444444',
   },
   pillActive: {
-    backgroundColor: C.accent,
-    borderColor: C.accent,
+    backgroundColor: '#F4A825',
+    borderColor: '#F4A825',
   },
   pillText: {
-    color: C.textSecondary,
+    color: '#FFFFFF',
     fontSize: 14,
     fontWeight: '500',
   },
   pillTextActive: {
     color: '#000000',
-    fontWeight: '700',
-  },
-  listContent: {
-    paddingHorizontal: 16,
-    paddingTop: 8,
-    paddingBottom: 24,
+    fontWeight: 'bold',
   },
   centered: {
     flex: 1,
