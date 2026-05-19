@@ -15,6 +15,7 @@ interface CartStore {
   applyActions: (actions: CartAction[]) => void;
   addMessage: (message: ChatMessage) => void;
   setMoodData: (data: { mood: string; moodLabel: string; recommendedItemIds: string[] }) => void;
+  resetMood: () => void;
 }
 
 const useCartStore = create<CartStore>()((set, get) => ({
@@ -99,6 +100,8 @@ const useCartStore = create<CartStore>()((set, get) => ({
 
   setMoodData: ({ mood, moodLabel, recommendedItemIds }) =>
     set({ moodSet: true, mood, moodLabel, recommendedItemIds }),
+
+  resetMood: () => set({ moodSet: false, mood: null, moodLabel: null, recommendedItemIds: [] }),
 }));
 
 export default useCartStore;

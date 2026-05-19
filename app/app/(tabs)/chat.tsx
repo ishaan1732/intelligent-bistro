@@ -231,12 +231,14 @@ export default function ChatScreen() {
   const applyActions = useCartStore((state) => state.applyActions);
   const moodSet = useCartStore((state) => state.moodSet);
   const setMoodData = useCartStore((state) => state.setMoodData);
-
+  const resetMood = useCartStore((state) => state.resetMood);
   const [localMessages, setLocalMessages] = useState<LocalMessage[]>([]);
+  const [resetKey, setResetKey] = useState(0);
   const localMessagesRef = useRef<LocalMessage[]>([]);
   const [menuItems, setMenuItems] = useState<MenuItem[]>([]);
   const [input, setInput] = useState('');
   const [sending, setSending] = useState(false);
+  const [showMoodCards, setShowMoodCards] = useState(true);
   const flatListRef = useRef<FlatList>(null);
   const scrollViewRef = useRef<ScrollView>(null);
   const pulseAnim = useRef(new Animated.Value(0.5)).current;
@@ -306,6 +308,7 @@ export default function ChatScreen() {
 
     addLocalMsg({ type: 'text', role: 'user', content: `${label} ${emoji}` });
     addMessage({ role: 'user', content: `${label} ${emoji}` });
+    setShowMoodCards(false);
     setSending(true);
 
     try {
@@ -366,6 +369,7 @@ export default function ChatScreen() {
         const res = await axios.post<MoodResponse>(`${API_BASE_URL}/mood`, { feeling: text });
         console.log('[mood] response:', res.data);
         pushMoodResponse(res.data);
+        setShowMoodCards(false);
       } else {
         console.log('[chat] routing to /chat:', text);
         const currentMood = useCartStore.getState().mood;
@@ -392,6 +396,24 @@ export default function ChatScreen() {
     }
   }
 
+
+  function doReset() {
+    resetMood();
+    // clearCart();
+    const welcomeMsg: LocalMessage = {
+      type: 'text',
+      role: 'assistant',
+      content: "Hi! I'm your Bistro assistant 🍽️\nTell me what you'd like to order, or share how you're feeling and I'll recommend something perfect for you!"
+    };
+    setLocalMessages([welcomeMsg]);
+    localMessagesRef.current = [welcomeMsg];
+    setInput('');
+    setSending(false);
+    moodCardsOpacity.setValue(1);
+    setShowMoodCards(true);
+    setResetKey(prev => prev + 1);
+  }
+
   const canSend = input.trim().length > 0 && !sending;
 
   return (
@@ -405,9 +427,14 @@ export default function ChatScreen() {
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
           <View style={styles.header}>
             <Text style={styles.headerTitle}>AI Assistant</Text>
-            <View style={styles.onlineRow}>
-              <Animated.View style={[styles.onlineDot, { opacity: pulseAnim }]} />
-              <Text style={styles.onlineLabel}>Online</Text>
+            <View style={styles.headerRight}>
+              <TouchableOpacity style={styles.resetBtn} onPress={doReset} activeOpacity={0.7}>
+                <FontAwesome name="refresh" size={14} color="#888888" />
+              </TouchableOpacity>
+              <View style={styles.onlineRow}>
+                <Animated.View style={[styles.onlineDot, { opacity: pulseAnim }]} />
+                <Text style={styles.onlineLabel}>Online</Text>
+              </View>
             </View>
           </View>
         </TouchableWithoutFeedback>
@@ -415,6 +442,7 @@ export default function ChatScreen() {
         {/* FlatList — NOT inside TouchableWithoutFeedback */}
         {Platform.OS === 'web' ? (
           <ScrollView
+            key={resetKey}
             ref={scrollViewRef}
             style={{ flex: 1 }}
             contentContainerStyle={styles.listContent}
@@ -460,7 +488,7 @@ export default function ChatScreen() {
         )}
 
         {/* Mood cards — NOT inside TouchableWithoutFeedback */}
-        {!moodSet && (
+        {showMoodCards && (
           <Animated.View style={[styles.moodCardsContainer, { opacity: moodCardsOpacity }]}>
             <ScrollView
               horizontal
@@ -534,6 +562,19 @@ const styles = StyleSheet.create({
     color: C.textPrimary,
     fontSize: 20,
     fontWeight: 'bold',
+  },
+  headerRight: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 12,
+  },
+  resetBtn: {
+    width: 36,
+    height: 36,
+    borderRadius: 18,
+    backgroundColor: '#2A2A2A',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   onlineRow: {
     flexDirection: 'row',
