@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import {
   Animated,
   FlatList,
+  Image,
   Keyboard,
   KeyboardAvoidingView,
   Platform,
@@ -68,7 +69,22 @@ function RecommendationCard({ item }: { item: MenuItem }) {
   return (
     <Animated.View style={[styles.recCard, { opacity }]}>
 
-      {/* Top section — always takes available space pushing button down */}
+      {/* Food image at top */}
+      {item.imageUrl && (
+        <Image
+          source={{ uri: item.imageUrl }}
+          style={{
+            width: '100%',
+            height: 90,
+            borderRadius: 8,
+            marginBottom: 8,
+            backgroundColor: '#2A2A2A',
+          }}
+          resizeMode="cover"
+        />
+      )}
+
+      {/* Name and price */}
       <View style={{ flex: 1 }}>
         <Text style={styles.recName} numberOfLines={2}>{item.name}</Text>
         <Text style={styles.recPrice}>${item.price.toFixed(2)}</Text>
@@ -604,7 +620,7 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     padding: 12,
     width: 160,
-    height: 140,
+    height: 220,
     justifyContent: 'space-between',
   },
   recName: {
