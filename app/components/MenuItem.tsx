@@ -1,5 +1,5 @@
 import { useRef } from 'react';
-import { Animated, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Animated, Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import type { MenuItem } from '@/types';
 import useCartStore from '@/store/cartStore';
 
@@ -30,18 +30,34 @@ export default function MenuItemCard({ item }: Props) {
 
   return (
     <View style={styles.card}>
-      <Text style={styles.name} numberOfLines={2}>
-        {item.name}
-      </Text>
-      <Text style={styles.description} numberOfLines={2}>
-        {item.description}
-      </Text>
+
+      {/* Top row — text left, image right */}
+      <View style={{ flexDirection: 'row', gap: 12 }}>
+
+        {/* Left — name and description */}
+        <View style={{ flex: 1 }}>
+          <Text style={styles.name} numberOfLines={2}>{item.name}</Text>
+          <Text style={styles.description} numberOfLines={2}>{item.description}</Text>
+        </View>
+
+        {/* Right — image */}
+        {item.imageUrl && (
+          <Image
+            source={{ uri: item.imageUrl }}
+            style={{ width: 80, height: 80, borderRadius: 10, backgroundColor: '#2A2A2A' }}
+            resizeMode="cover"
+          />
+        )}
+      </View>
+
+      {/* Bottom row — price left, add button or qty controls right */}
       <View style={styles.footer}>
         <Text style={styles.price}>${item.price.toFixed(2)}</Text>
+
         {qty === 0 ? (
           <Animated.View style={{ transform: [{ scale }] }}>
             <TouchableOpacity style={styles.addBtn} onPress={handleAdd} activeOpacity={0.8}>
-              <Text style={styles.addBtnText}>+ Add to Cart</Text>
+              <Text style={styles.addBtnText}>+ Add</Text>
             </TouchableOpacity>
           </Animated.View>
         ) : (
@@ -65,6 +81,7 @@ export default function MenuItemCard({ item }: Props) {
           </View>
         )}
       </View>
+
     </View>
   );
 }
@@ -92,6 +109,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
+    marginTop: 12,
   },
   price: {
     color: C.accent,

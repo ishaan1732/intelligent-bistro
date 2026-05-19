@@ -6,7 +6,8 @@
     "price": 13.99,
     "category": "burgers",
     "cuisine": "american",
-    "moods": ["comfort", "tired", "neutral"]
+    "moods": ["comfort", "tired", "neutral"],
+    "imageUrl": "https://images.pexels.com/photos/1639557/pexels-photo-1639557.jpeg?w=400"
   },
   {
     "id": "b2",
@@ -15,7 +16,8 @@
     "price": 14.99,
     "category": "burgers",
     "cuisine": "american",
-    "moods": ["comfort", "tired", "neutral"]
+    "moods": ["comfort", "tired", "neutral"],
+    "imageUrl": "https://images.pexels.com/photos/3219547/pexels-photo-3219547.jpeg?w=400"
   },
   {
     "id": "b3",
@@ -24,7 +26,8 @@
     "price": 14.49,
     "category": "burgers",
     "cuisine": "american",
-    "moods": ["comfort", "tired", "neutral"]
+    "moods": ["comfort", "tired", "neutral"],
+    "imageUrl": "https://images.pexels.com/photos/1633578/pexels-photo-1633578.jpeg?w=400"
   },
   {
     "id": "s1",
@@ -33,7 +36,8 @@
     "price": 5.99,
     "category": "sides",
     "cuisine": "american",
-    "moods": ["comfort", "heartbroken", "neutral"]
+    "moods": ["comfort", "heartbroken", "neutral"],
+    "imageUrl": "https://images.pexels.com/photos/1583884/pexels-photo-1583884.jpeg?w=400"
   },
   {
     "id": "s2",
@@ -42,7 +46,8 @@
     "price": 5.49,
     "category": "sides",
     "cuisine": "american",
-    "moods": ["comfort", "heartbroken", "neutral"]
+    "moods": ["comfort", "heartbroken", "neutral"],
+    "imageUrl": "https://media.istockphoto.com/id/533423341/photo/crispy-onion-rings-close-up.jpg?s=612x612&w=0&k=20&c=Uplc8ZTYUuriyWoySj4VDE_Bs4t8luQXqWzl9wI4k1Y="
   },
   {
     "id": "s3",
@@ -51,7 +56,8 @@
     "price": 4.99,
     "category": "sides",
     "cuisine": "american",
-    "moods": ["comfort", "heartbroken", "neutral"]
+    "moods": ["comfort", "heartbroken", "neutral"],
+    "imageUrl": "https://images.pexels.com/photos/1059905/pexels-photo-1059905.jpeg?w=400"
   },
   {
     "id": "d1",
@@ -60,7 +66,8 @@
     "price": 3.49,
     "category": "drinks",
     "cuisine": "american",
-    "moods": ["stressed", "joyful", "neutral"]
+    "moods": ["stressed", "joyful", "neutral"],
+    "imageUrl": "https://images.pexels.com/photos/96974/pexels-photo-96974.jpeg?w=400"
   },
   {
     "id": "d2",
@@ -69,7 +76,8 @@
     "price": 5.99,
     "category": "drinks",
     "cuisine": "american",
-    "moods": ["stressed", "joyful", "neutral"]
+    "moods": ["stressed", "joyful", "neutral"],
+    "imageUrl": "https://media.istockphoto.com/id/1149900037/photo/root-beer-float.jpg?s=612x612&w=0&k=20&c=lSXdS8yrYMfpZj23vpkLS0x6QN8BmgiOZAff8PSHf9g="
   },
   {
     "id": "de1",
@@ -78,7 +86,8 @@
     "price": 7.99,
     "category": "desserts",
     "cuisine": "american",
-    "moods": ["heartbroken", "joyful", "romantic"]
+    "moods": ["heartbroken", "joyful", "romantic"],
+    "imageUrl": "https://images.pexels.com/photos/2067396/pexels-photo-2067396.jpeg?w=400"
   },
   {
     "id": "de2",
@@ -87,7 +96,8 @@
     "price": 8.49,
     "category": "desserts",
     "cuisine": "american",
-    "moods": ["heartbroken", "joyful", "romantic"]
+    "moods": ["heartbroken", "joyful", "romantic"],
+    "imageUrl": "https://media.istockphoto.com/id/2033937470/photo/banana-split-with-cherries-and-nuts.jpg?s=612x612&w=0&k=20&c=X9-I6JhDMlxAhqt8TC5iZ7W54NcPzqbHjNx-O-Ooolo="
   },
   {
     "id": "jp1",
@@ -96,7 +106,8 @@
     "price": 14.99,
     "category": "mains",
     "cuisine": "japanese",
-    "moods": ["comfort", "tired"]
+    "moods": ["comfort", "tired"],
+    "imageUrl": "https://media.istockphoto.com/id/2064521882/photo/soy-sauce-ramen.jpg?s=612x612&w=0&k=20&c=BNjUvbK8bVIjaZMVHB3UKz8hStD1uFJxuAGOkN8bIHM="
   },
   {
     "id": "jp2",
@@ -105,7 +116,8 @@
     "price": 15.99,
     "category": "mains",
     "cuisine": "japanese",
-    "moods": ["tired", "adventurous"]
+    "moods": ["tired", "adventurous"],
+    "imageUrl": "https://media.istockphoto.com/id/1489394671/photo/chicken-katsu-curry-is-a-meal-crispy-chicken-chunks-served-over-rice-with-japanese-curry-sauce.jpg?s=612x612&w=0&k=20&c=eC2o3c7cM0WJN3ZG2Clmlt3g9sway4m5KuwRugta5kM="
   },
   {
     "id": "jp3",
@@ -114,7 +126,8 @@
     "price": 8.99,
     "category": "sides",
     "cuisine": "japanese",
-    "moods": ["adventurous", "neutral"]
+    "moods": ["adventurous", "neutral"],
+    "imageUrl": "https://media.istockphoto.com/id/1286079738/photo/fried-dumplings-gyoza-with-soy-sauce-and-chopsticks-top-view.jpg?s=612x612&w=0&k=20&c=6FREWOBT7F7kx2isai3j2T5w9XYi7bp5wHfmQY5okJ8="
   },
   {
     "id": "jp4",
@@ -123,7 +136,8 @@
     "price": 16.99,
     "category": "mains",
     "cuisine": "japanese",
-    "moods": ["adventurous", "stressed"]
+    "moods": ["adventurous", "stressed"],
+    "imageUrl": "https://media.istockphoto.com/id/964008352/photo/dragon-roll-king-prawn-sushi.jpg?s=612x612&w=0&k=20&c=IvKOjA4_Tq2bN32VJuvq3GCjLC1b9hMAtnQWbXSNAl4="
   },
   {
     "id": "jp5",
@@ -132,7 +146,8 @@
     "price": 6.99,
     "category": "desserts",
     "cuisine": "japanese",
-    "moods": ["stressed", "heartbroken"]
+    "moods": ["stressed", "heartbroken"],
+    "imageUrl": "https://media.istockphoto.com/id/1267585395/photo/green-tea-ice-cream.jpg?s=612x612&w=0&k=20&c=hT9Un7Hd7sCJxrsse5nCo2CwzAG9-C8eCglBhSKVbKQ="
   },
   {
     "id": "jp6",
@@ -141,7 +156,8 @@
     "price": 4.99,
     "category": "sides",
     "cuisine": "japanese",
-    "moods": ["stressed", "comfort"]
+    "moods": ["stressed", "comfort"],
+    "imageUrl": "https://media.istockphoto.com/id/155341533/photo/miso-soup.jpg?s=612x612&w=0&k=20&c=0614e4CQibtJ5RlwsHfdFuVPa9FS6QG38ITuBXoh4Qk="
   },
   {
     "id": "gr1",
@@ -150,7 +166,8 @@
     "price": 15.99,
     "category": "mains",
     "cuisine": "greek",
-    "moods": ["tired", "adventurous"]
+    "moods": ["tired", "adventurous"],
+    "imageUrl": "https://media.istockphoto.com/id/1348716579/photo/greek-chicken-souvlaki-with-tzatziki.jpg?s=612x612&w=0&k=20&c=2NelD-HPHKiDIlcp0xBmpbKNgGer0rX-9cT99_KlNQk="
   },
   {
     "id": "gr2",
@@ -159,7 +176,8 @@
     "price": 9.99,
     "category": "sides",
     "cuisine": "greek",
-    "moods": ["adventurous", "stressed"]
+    "moods": ["adventurous", "stressed"],
+    "imageUrl": "https://media.istockphoto.com/id/1300215085/photo/spanakopita-with-tzatziki-sauce.jpg?s=612x612&w=0&k=20&c=O3HDK4Qaq6x5oARlSqZ3RCRS0AgZ9JIYcqzXuPpLQko="
   },
   {
     "id": "gr3",
@@ -168,7 +186,8 @@
     "price": 10.99,
     "category": "sides",
     "cuisine": "greek",
-    "moods": ["stressed", "neutral"]
+    "moods": ["stressed", "neutral"],
+    "imageUrl": "https://media.istockphoto.com/id/1461256163/photo/feta-cheese-salad-on-wooden-table.jpg?s=612x612&w=0&k=20&c=JISWAr9aTfUdLkgoR2rSWQN-ZzfQvOrhG9stauCUqSE="
   },
   {
     "id": "gr4",
@@ -177,7 +196,8 @@
     "price": 6.99,
     "category": "desserts",
     "cuisine": "greek",
-    "moods": ["joyful", "heartbroken"]
+    "moods": ["joyful", "heartbroken"],
+    "imageUrl": "https://media.istockphoto.com/id/1499978294/photo/traditional-turkish-dessert-pistachio-baklava-on-a-white-porcelain-plate.jpg?s=612x612&w=0&k=20&c=5xSbnSJI_CwvfmH4lLRFe1vKap5k7iKlMkjXNGiWy1E="
   },
   {
     "id": "gr5",
@@ -186,7 +206,8 @@
     "price": 8.99,
     "category": "sides",
     "cuisine": "greek",
-    "moods": ["stressed", "neutral"]
+    "moods": ["stressed", "neutral"],
+    "imageUrl": "https://media.istockphoto.com/id/1912072381/photo/wooden-bowl-of-fresh-sour-cream-dip-sauce-with-herbs.jpg?s=612x612&w=0&k=20&c=r_td2S8AVDUYGrNBCB9IDWdGtpOaB-gNHYIiTO8AX2Y="
   },
   {
     "id": "gr6",
@@ -195,7 +216,8 @@
     "price": 16.99,
     "category": "mains",
     "cuisine": "greek",
-    "moods": ["tired", "adventurous", "comfort"]
+    "moods": ["tired", "adventurous", "comfort"],
+    "imageUrl": "https://media.istockphoto.com/id/959937952/photo/greek-gyros-wraped-in-a-pita-bread-on-a-wooden-background.jpg?s=612x612&w=0&k=20&c=Fh0dF45Brlj6oJc5BCCkqSP29PXgm648w68ZkmmY1gA="
   },
   {
     "id": "fr1",
@@ -204,7 +226,8 @@
     "price": 12.99,
     "category": "mains",
     "cuisine": "french",
-    "moods": ["comfort", "tired"]
+    "moods": ["comfort", "tired"],
+    "imageUrl": "https://media.istockphoto.com/id/1447501119/photo/croque-monsieur-cheese-and-ham-toasted-sandwich.jpg?s=612x612&w=0&k=20&c=3y8gk40m8xNOdt3JdWFJmaUTNvWtcwJ-DCBJNXBzzKg="
   },
   {
     "id": "fr2",
@@ -213,7 +236,8 @@
     "price": 22.99,
     "category": "mains",
     "cuisine": "french",
-    "moods": ["romantic", "tired"]
+    "moods": ["romantic", "tired"],
+    "imageUrl": "https://media.istockphoto.com/id/178221152/photo/close-up-of-beef-bourguignon-served-on-white-plate.jpg?s=612x612&w=0&k=20&c=MwHmWzDVQ_qqe9PZ9Kk2O9T9BUdF2AU7lqi6Fg8zGzA="
   },
   {
     "id": "fr3",
@@ -222,7 +246,8 @@
     "price": 8.99,
     "category": "desserts",
     "cuisine": "french",
-    "moods": ["romantic", "joyful"]
+    "moods": ["romantic", "joyful"],
+    "imageUrl": "https://media.istockphoto.com/id/1158187709/photo/creme-brulee-french-traditional-dessert.jpg?s=612x612&w=0&k=20&c=HAxCyw78r66j33rAUs8FdUYkRH8AdEFs3EZc1x0FknY="
   },
   {
     "id": "fr4",
@@ -231,7 +256,8 @@
     "price": 4.99,
     "category": "sides",
     "cuisine": "french",
-    "moods": ["comfort", "neutral"]
+    "moods": ["comfort", "neutral"],
+    "imageUrl": "https://media.istockphoto.com/id/1418644931/photo/heap-of-freshly-baked-croissants-in-a-bakery.jpg?s=612x612&w=0&k=20&c=0PVbj9upnAoxaR9DImH6do00td7T9H1aoU231Of8PSs="
   },
   {
     "id": "fr5",
@@ -240,7 +266,8 @@
     "price": 9.99,
     "category": "mains",
     "cuisine": "french",
-    "moods": ["comfort", "heartbroken"]
+    "moods": ["comfort", "heartbroken"],
+    "imageUrl": "https://images.pexels.com/photos/539451/pexels-photo-539451.jpeg?w=400"
   },
   {
     "id": "fr6",
@@ -249,7 +276,8 @@
     "price": 10.99,
     "category": "desserts",
     "cuisine": "french",
-    "moods": ["romantic", "joyful"]
+    "moods": ["romantic", "joyful"],
+    "imageUrl": "https://images.pexels.com/photos/376464/pexels-photo-376464.jpeg?w=400"
   },
   {
     "id": "mx1",
@@ -258,7 +286,8 @@
     "price": 11.99,
     "category": "mains",
     "cuisine": "mexican",
-    "moods": ["adventurous", "joyful"]
+    "moods": ["adventurous", "joyful"],
+    "imageUrl": "https://images.pexels.com/photos/2092507/pexels-photo-2092507.jpeg?w=400"
   },
   {
     "id": "mx2",
@@ -267,7 +296,8 @@
     "price": 8.99,
     "category": "sides",
     "cuisine": "mexican",
-    "moods": ["neutral", "joyful"]
+    "moods": ["neutral", "joyful"],
+    "imageUrl": "https://media.istockphoto.com/id/935958112/photo/guacamole-avocado-lime-tomato-onion-and-cilantro-served-with-nachos-traditional-mexican-snack.jpg?s=612x612&w=0&k=20&c=JcqMyZAsVSxhVWrpUGmftCRSekXWN6QNv--Svzto030="
   },
   {
     "id": "mx3",
@@ -276,7 +306,8 @@
     "price": 6.99,
     "category": "desserts",
     "cuisine": "mexican",
-    "moods": ["heartbroken", "joyful"]
+    "moods": ["heartbroken", "joyful"],
+    "imageUrl": "https://media.istockphoto.com/id/2154912399/photo/churros-with-hot-chocolate-sauce-sugar-and-cinnamon.jpg?s=612x612&w=0&k=20&c=q1m2lZOM8mqLo9ruPuhh_NZGhAdf4rAUtvGga_iLvPI="
   },
   {
     "id": "mx4",
@@ -285,7 +316,8 @@
     "price": 3.99,
     "category": "drinks",
     "cuisine": "mexican",
-    "moods": ["neutral", "stressed"]
+    "moods": ["neutral", "stressed"],
+    "imageUrl": "https://media.istockphoto.com/id/1412591080/photo/homemade-horchata-rice-drink-in-a-glass-with-ice-and-cinnamon-stick-on-a-gray-concrete.jpg?s=612x612&w=0&k=20&c=xvMADttHi_uVSG0H9ernpHjS1AiDU5WIa_BaPAEy1xA="
   },
   {
     "id": "mx5",
@@ -294,7 +326,8 @@
     "price": 13.99,
     "category": "mains",
     "cuisine": "mexican",
-    "moods": ["comfort", "adventurous"]
+    "moods": ["comfort", "adventurous"],
+    "imageUrl": "https://images.pexels.com/photos/2092507/pexels-photo-2092507.jpeg?w=400"
   },
   {
     "id": "mx6",
@@ -303,7 +336,8 @@
     "price": 5.99,
     "category": "sides",
     "cuisine": "mexican",
-    "moods": ["adventurous", "joyful"]
+    "moods": ["adventurous", "joyful"],
+    "imageUrl": "https://media.istockphoto.com/id/1282526185/photo/mexican-grilled-corn-elote-isolated-on-white-background.jpg?s=612x612&w=0&k=20&c=6xXfhJ8DGBFWC3zi6sLHLl43w2jBdjRdIZFacmDJmVY="
   },
   {
     "id": "in1",
@@ -312,7 +346,8 @@
     "price": 15.99,
     "category": "mains",
     "cuisine": "indian",
-    "moods": ["comfort", "tired"]
+    "moods": ["comfort", "tired"],
+    "imageUrl": "https://images.pexels.com/photos/2474661/pexels-photo-2474661.jpeg?w=400"
   },
   {
     "id": "in2",
@@ -321,7 +356,8 @@
     "price": 3.99,
     "category": "sides",
     "cuisine": "indian",
-    "moods": ["comfort", "neutral"]
+    "moods": ["comfort", "neutral"],
+    "imageUrl": "https://media.istockphoto.com/id/1143530040/photo/indian-naan-bread-with-garlic-butter-on-wooden-table.jpg?s=612x612&w=0&k=20&c=71SgbJtnfiHUiud1oGxnhiZsx5nuivWwZt8DlIk8hi0="
   },
   {
     "id": "in3",
@@ -330,7 +366,8 @@
     "price": 4.99,
     "category": "drinks",
     "cuisine": "indian",
-    "moods": ["stressed", "joyful"]
+    "moods": ["stressed", "joyful"],
+    "imageUrl": "https://media.istockphoto.com/id/1365859011/photo/drink-mango-lassi-in-two-glasses-on-rustic-concrete-table-with-fresh-ripe-cut-manfo-from-above.jpg?s=612x612&w=0&k=20&c=uHnr_0raQDe2sgUYHdP5GSa2raaj3ILG4m1cmFHtVJA="
   },
   {
     "id": "in4",
@@ -339,7 +376,8 @@
     "price": 6.99,
     "category": "desserts",
     "cuisine": "indian",
-    "moods": ["heartbroken", "joyful"]
+    "moods": ["heartbroken", "joyful"],
+    "imageUrl": "https://media.istockphoto.com/id/163064596/photo/gulab-jamun.jpg?s=612x612&w=0&k=20&c=JvJ4AAs-N5pRzzRmVg1lG0talC3QoUt0ZGiO1NKz-kQ="
   },
   {
     "id": "in5",
@@ -348,7 +386,8 @@
     "price": 14.99,
     "category": "mains",
     "cuisine": "indian",
-    "moods": ["stressed", "adventurous"]
+    "moods": ["stressed", "adventurous"],
+    "imageUrl": "https://media.istockphoto.com/id/1308593824/photo/palak-paneer-served-basmati-rice-on-grey-background.jpg?s=1024x1024&w=is&k=20&c=bjCa0rZEtM4RQC-2Kn0mqd8TGy5Vh4RGTwDHCoo-8z8="
   },
   {
     "id": "in6",
@@ -357,6 +396,7 @@
     "price": 16.99,
     "category": "mains",
     "cuisine": "indian",
-    "moods": ["adventurous", "tired"]
+    "moods": ["adventurous", "tired"],
+    "imageUrl": "https://images.pexels.com/photos/1624487/pexels-photo-1624487.jpeg?w=400"
   }
 ]
