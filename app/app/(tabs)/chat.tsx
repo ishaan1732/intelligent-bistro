@@ -233,16 +233,22 @@ export default function ChatScreen() {
   const setMoodData = useCartStore((state) => state.setMoodData);
 
   const [localMessages, setLocalMessages] = useState<LocalMessage[]>([]);
+  const localMessagesRef = useRef<LocalMessage[]>([]);
   const [menuItems, setMenuItems] = useState<MenuItem[]>([]);
   const [input, setInput] = useState('');
   const [sending, setSending] = useState(false);
   const flatListRef = useRef<FlatList>(null);
+  const scrollViewRef = useRef<ScrollView>(null);
   const pulseAnim = useRef(new Animated.Value(0.5)).current;
   const moodCardsOpacity = useRef(new Animated.Value(1)).current;
 
   function addLocalMsg(msg: LocalMessage) {
-    setLocalMessages((prev) => [...prev, msg]);
-  }
+  setLocalMessages((prev) => {
+    const updated = [...prev, msg];
+    localMessagesRef.current = updated; // ADD THIS
+    return updated;
+  });
+}
 
   // Welcome message on first load
   useEffect(() => {
@@ -363,7 +369,7 @@ export default function ChatScreen() {
       } else {
         console.log('[chat] routing to /chat:', text);
         const currentMood = useCartStore.getState().mood;
-        const history = localMessages
+        const history = localMessagesRef.current
           .filter((m) => m.type === 'text')
           .slice(-6)
           .map((m) => ({ role: (m as TextMessage).role, content: (m as TextMessage).content }));
@@ -407,29 +413,51 @@ export default function ChatScreen() {
         </TouchableWithoutFeedback>
 
         {/* FlatList — NOT inside TouchableWithoutFeedback */}
-        <FlatList
-          ref={flatListRef}
-          style={styles.flex}
-          data={localMessages}
-          keyExtractor={(_, i) => i.toString()}
-          contentContainerStyle={styles.listContent}
-          showsVerticalScrollIndicator={false}
-          keyboardShouldPersistTaps="handled"
-          keyboardDismissMode="interactive"
-          onContentSizeChange={() =>
-            flatListRef.current?.scrollToEnd({ animated: true })
-          }
-          onLayout={() =>
-            flatListRef.current?.scrollToEnd({ animated: false })
-          }
-          renderItem={({ item }) => {
-            if (item.type === 'recommendations') {
-              return <RecommendationRow items={item.items} />;
+        {Platform.OS === 'web' ? (
+          <ScrollView
+            ref={scrollViewRef}
+            style={{ flex: 1 }}
+            contentContainerStyle={styles.listContent}
+            showsVerticalScrollIndicator={false}
+            keyboardShouldPersistTaps="handled"
+            onContentSizeChange={() =>
+              scrollViewRef.current?.scrollToEnd({ animated: true })
             }
-            return <MessageBubble item={item} />;
-          }}
-          ListFooterComponent={sending ? <TypingIndicator /> : null}
-        />
+          >
+            {localMessages.map((item, index) => {
+              if (item.type === 'recommendations') {
+                return <RecommendationRow key={index} items={item.items} />;
+              }
+              return <MessageBubble key={index} item={item} />;
+            })}
+            {sending && <TypingIndicator />}
+          </ScrollView>
+        ) : (
+          <FlatList
+            ref={flatListRef}
+            style={{ flex: 1 }}
+            data={localMessages}
+            extraData={localMessages.length}
+            keyExtractor={(_, i) => `msg-${i}`}
+            contentContainerStyle={styles.listContent}
+            showsVerticalScrollIndicator={false}
+            keyboardShouldPersistTaps="handled"
+            keyboardDismissMode="interactive"
+            onContentSizeChange={() =>
+              flatListRef.current?.scrollToEnd({ animated: true })
+            }
+            onLayout={() =>
+              flatListRef.current?.scrollToEnd({ animated: false })
+            }
+            renderItem={({ item }) => {
+              if (item.type === 'recommendations') {
+                return <RecommendationRow items={item.items} />;
+              }
+              return <MessageBubble item={item} />;
+            }}
+            ListFooterComponent={sending ? <TypingIndicator /> : null}
+          />
+        )}
 
         {/* Mood cards — NOT inside TouchableWithoutFeedback */}
         {!moodSet && (
